@@ -105,15 +105,6 @@ export default async function PostPage({ params }: { params: { slug: string } })
         {post.title}
       </h1>
       <p className="text-gray-600 text-sm mb-6 font-roboto">Published on: {formatPostDate(post.date)}</p>
-      {post.imageUrl && (
-        <div className="relative w-full h-64 md:h-96 overflow-hidden rounded-lg shadow-md mb-8">
-          <img
-            src={post.imageUrl}
-            alt={post.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      )}
       <div
         className="prose prose-lg max-w-none text-[#2B1E1A] font-roboto"
         dangerouslySetInnerHTML={{ __html: post.contentHtml }}
