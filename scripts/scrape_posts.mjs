@@ -7,16 +7,27 @@ import yaml from 'js-yaml';
 async function fetchWithRetry(url, retries = 5, initialDelay = 1000) {
   for (let i = 0; i < retries; i++) {
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        headers: {
+          // This tells the server you are a standard Chrome browser
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'application/json'
+        }
+      });
+      
       if (res.ok) {
         return await res.json();
       } else {
         console.warn(`Fetch failed for ${url}, status: ${res.status}. Retrying...`);
+        // If it's a 403, the server is blocking us specifically
+        if (res.status === 403) {
+           console.error("Access Forbidden (403). The server is blocking the script.");
+        }
       }
     } catch (error) {
       console.error(`Fetch error for ${url}: ${error}. Retrying...`);
     }
-    const delay = initialDelay * Math.pow(2, i); // Exponential backoff
+    const delay = initialDelay * Math.pow(2, i);
     await new Promise(resolve => setTimeout(resolve, delay));
   }
   throw new Error(`Failed to fetch ${url} after ${retries} retries.`);
@@ -25,19 +36,22 @@ async function fetchWithRetry(url, retries = 5, initialDelay = 1000) {
 async function getAllPosts() {
   let allPosts = [];
   let page = 1;
-  const perPage = 100; // Max posts per page for WordPress API
+  const perPage = 100;
 
   while (true) {
     try {
-      const posts = await fetchWithRetry(`https://santonino-nz.org/wp-json/wp/v2/posts?_embed&per_page=${perPage}&page=${page}`);
-      if (posts.length === 0) {
+      // Using the alternate rest_route parameter which often bypasses 404 issues
+      const url = `http://santonino-nz.org/?rest_route=/wp/v2/posts&_embed&per_page=${perPage}&page=${page}`;
+      const posts = await fetchWithRetry(url);
+      
+      if (!posts || posts.length === 0) {
         break;
       }
       allPosts = allPosts.concat(posts);
       console.log(`Fetched page ${page}, total posts: ${allPosts.length}`);
       page++;
     } catch (error) {
-      console.error(`Error fetching posts on page ${page}: ${error.message}`);
+      console.error(`Error fetching posts: ${error.message}`);
       break;
     }
   }
@@ -135,7 +149,7 @@ async function scrapePosts() {
       // Also handle the i0.wp.com subdomain for WordPress.com image optimization
       const escapedUrl = url
         .replace(/&#038;/g, '&')
-        .replace(/https:\/\/i\d+\.wp\.com\//g, 'https://santonino-nz.org/') // Replace i0.wp.com with original domain
+        .replace(/https:\/\/i\d+\.wp\.com\//g, 'http://santonino-nz.org/') // Replace i0.wp.com with original domain
         .replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       // Consider variations with and without query parameters or hashes in the original HTML
       return new RegExp(`${escapedUrl}(?:\\?|#|$)`, 'g');
