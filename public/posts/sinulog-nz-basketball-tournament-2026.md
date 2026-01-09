@@ -1,7 +1,8 @@
-title: Sinulog NZ Basketball Tournament 2026
-date: 2026-01-09
-imageUrl: /posts/assets/images/sinulog-nz-basketball-2026-poster.jpg
-
+---
+title: "Sinulog NZ Basketball Tournament 2026"
+date: "2026-01-09T16:00:00.000Z"
+imageUrl: "/posts/assets/images/sinulog-nz-basketball-2026-poster.jpg"
+---
 ![Sinulog NZ Basketball Tournament 2026 Poster](/posts/assets/images/sinulog-nz-basketball-2026-poster.jpg)
 
 The NZ-Filipino Devotees of Señor Santo Niño Sinulog NZ, in partnership with the United Filipino Community Sports Association (UFCSA), proudly present this year's **Sinulog NZ Basketball Tournament 2026**!
