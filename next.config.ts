@@ -2,19 +2,22 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
-  /* config options here */
+  // Forces /about to become /about/index.html 
+  // This is much more reliable for GitHub Pages routing
+  trailingSlash: true, 
+  
+  // Explicitly tell Next where to put the build (matches your YAML path)
+  distDir: 'out', 
+  
   images: {
     unoptimized: true,
   },
-    eslint: {
-    // Ignore ESLint errors during builds
+  eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    // Ignore TypeScript errors during builds
     ignoreBuildErrors: true,
   },
-
 };
 
 export default nextConfig;
