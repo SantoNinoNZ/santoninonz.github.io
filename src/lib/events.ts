@@ -3,7 +3,7 @@ import path from 'path';
 import yaml from 'js-yaml';
 import { remark } from 'remark';
 import html from 'remark-html';
-import { isPast, isToday } from 'date-fns'; // Removed parseISO from here
+import { isPast, isToday, parse, isBefore, isAfter, startOfDay } from 'date-fns';
 
 export interface RecurringEvent {
   slug: string;
@@ -53,23 +53,28 @@ export async function getSortedEventsData(): Promise<Event[]> {
   const fileContent = await fs.readFile(indexPath, 'utf8');
   const allEventsData: Event[] = yaml.load(fileContent) as Event[];
 
-  const today = new Date();
+  const today = startOfDay(new Date());
 
-  // Filter out past dated events
+  // Filter out past dated events (keep events that are current or upcoming)
   const filteredEvents = allEventsData.filter(event => {
     if (isDatedEvent(event)) {
-      const endDate = new Date(event.endDate); // Use new Date() for parsing
-      return isToday(endDate) || !isPast(endDate);
+      // Parse dates with the format used in YAML (e.g., "January 9, 2026")
+      const endDate = startOfDay(parse(event.endDate, 'MMMM d, yyyy', new Date()));
+
+      // Keep events that haven't ended yet (endDate is today or in the future)
+      return !isBefore(endDate, today);
     }
-    return true;
+    return true; // Keep all recurring events
   });
 
-  // Sort events by date, recurring events first, then dated events by start date
+  // Sort events: recurring events first, then dated events by start date (current/soonest first)
   return filteredEvents.sort((a, b) => {
     if (isRecurringEvent(a) && !isRecurringEvent(b)) return -1;
     if (!isRecurringEvent(a) && isRecurringEvent(b)) return 1;
     if (isDatedEvent(a) && isDatedEvent(b)) {
-      return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
+      const aStart = parse(a.startDate, 'MMMM d, yyyy', new Date());
+      const bStart = parse(b.startDate, 'MMMM d, yyyy', new Date());
+      return aStart.getTime() - bStart.getTime();
     }
     return 0;
   });
