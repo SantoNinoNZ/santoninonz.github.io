@@ -10,6 +10,21 @@
   type: dated
   startDate: January 10, 2025
   endDate: January 18, 2025
-  venue: St. Benedict’s Parish of Newton-Auckland
-  address: 1 St Benedict’s Street, Eden Terrace, Auckland 1010
+  venue: St. Benedict's Parish of Newton-Auckland
+  address: 1 St Benedict's Street, Eden Terrace, Auckland 1010
   rosaryTime: 6:30 pm
+- slug: santo-nino-fiesta-2026
+  title: Santo Nino Fiesta Mass 2026
+  type: dated
+  startDate: January 9, 2026
+  endDate: January 17, 2026
+  venue: St. Benedict's Parish of Newton-Auckland
+  address: 1 St Benedict's Street, Eden Terrace, Auckland 1010
+  rosaryTime: 6:30 pm
+- slug: santo-nino-fiesta-celebration-2026
+  title: Santo Nino Fiesta Celebration 2026
+  type: dated
+  startDate: January 18, 2026
+  endDate: January 18, 2026
+  venue: Eventfinda Stadium
+  address: Silverfield and Argus Place, Wairau Valley, North Shore, Auckland
