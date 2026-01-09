@@ -6,6 +6,13 @@ endDate: January 18, 2026
 venue: Eventfinda Stadium
 address: Silverfield and Argus Place, Wairau Valley, North Shore, Auckland
 slug: santo-nino-fiesta-celebration-2026
+days:
+  - dayNumber: 1
+    date: Saturday, 18 January 2026
+    choir: Various Choirs
+    sponsorsPilgrims: All Santo Nino Devotees and Supporters
+    areaCoordinators: All Organizing Committee Members
+parkingInfo: Parking available at Eventfinda Stadium
 ---
 
 ## Celebrating 32 Years of Faith, Unity and Joy
