@@ -1,6 +1,7 @@
 ---
 title: "Sinulog NZ Basketball Tournament 2026"
 date: "2026-01-09T16:00:00.000Z"
+slug: "sinulog-nz-basketball-tournament-2026"
 imageUrl: "/posts/assets/images/sinulog-nz-basketball-2026-poster.jpg"
 ---
 ![Sinulog NZ Basketball Tournament 2026 Poster](/posts/assets/images/sinulog-nz-basketball-2026-poster.jpg)
