@@ -4,7 +4,7 @@ date: 2026-01-09
 imageUrl: /assets/images/sinulog-nz-festival-queen-vote-2026.jpg
 ---
 
-![Vote for Your Favourite Sinulog NZ Festival Queen 2026 Poster](/assets/images/sinulog-nz-festival-queen-vote-2026.jpg)
+![Vote for Your Favourite Sinulog NZ Festival Queen 2026 Poster](/posts/assets/images/sinulog-nz-festival-queen-vote-2026.jpg)
 
 The search for the Sinulog NZ Festival Queen 2026 is on! Support your favourite candidate and help crown this year’s queen by casting your vote online.
 
