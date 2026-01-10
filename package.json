@@ -11,6 +11,7 @@
     "deploy": "next build && gh-pages --nojekyll -d out"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.90.1",
     "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",

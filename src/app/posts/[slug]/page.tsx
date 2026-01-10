@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Header from "@/components/Header";
 import { getSortedPostsData, Post } from '@/lib/posts';
+import { supabase } from '@/lib/supabase';
 import path from 'path';
 import { promises as fs } from 'fs';
 
@@ -35,8 +36,39 @@ function formatPostDate(dateString: string): string {
 }
 
 async function getPostContent(slug: string): Promise<Post | null> {
+  // 1. Try fetching from Supabase first
+  if (supabase) {
+    try {
+      const { data: post, error } = await supabase
+        .from('posts')
+        .select('slug, title, published_at, excerpt, image_url, content')
+        .eq('slug', slug)
+        .eq('published', true)
+        .single();
+
+      if (!error && post) {
+        // Convert markdown content to HTML
+        const processedContent = await remark().use(html).process(post.content);
+        const contentHtml = processedContent.toString();
+
+        return {
+          slug: post.slug,
+          title: post.title,
+          date: post.published_at || new Date().toISOString(),
+          excerpt: post.excerpt || undefined,
+          imageUrl: post.image_url || undefined,
+          contentHtml,
+          source: 'supabase',
+        };
+      }
+    } catch (error) {
+      console.error(`Error fetching post from Supabase:`, error);
+    }
+  }
+
+  // 2. Fall back to static markdown file
   const filePath = path.join(process.cwd(), 'public', 'posts', `${slug}.md`);
-  
+
   try {
     const fileContent = await fs.readFile(filePath, 'utf8');
 
@@ -72,6 +104,7 @@ async function getPostContent(slug: string): Promise<Post | null> {
       date: frontMatter.date || '',
       contentHtml,
       imageUrl: imageUrl || undefined,
+      source: 'static',
     };
   } catch (error) {
     console.error(`Error reading or parsing post ${slug}:`, error);
