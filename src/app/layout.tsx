@@ -1,6 +1,7 @@
 import { Roboto, Lora } from "next/font/google";
 import VideoBackground from "./VideoBackground";
 import ServiceWorkerRegister from "./ServiceWorkerRegister";
+import UpdateNotifier from "@/components/UpdateNotifier";
 import "./globals.css";
 import { metadata } from "./metadata";
 
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${roboto.variable} ${lora.variable}`}>
         <ServiceWorkerRegister />
+        <UpdateNotifier />
         <VideoBackground />
         <div className="relative z-10 flex flex-col min-h-screen">
           {children}
