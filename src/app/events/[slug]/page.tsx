@@ -17,8 +17,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function EventPage({ params }: { params: { slug: string } }) {
-  const event = await getEventData(params.slug);
+export default async function EventPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const event = await getEventData(slug);
 
   if (!event) {
     return <div className="text-white text-center py-12">Event not found.</div>;
