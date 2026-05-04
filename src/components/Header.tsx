@@ -53,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({ onSearchChange, searchQuery }) => {
           <li><Link href="/join-us" className="hover:text-gray-300 transition-colors duration-300">Join Us</Link></li>
           <li className="relative group">
             <span className="hover:text-gray-300 transition-colors duration-300 cursor-pointer">Requests</span>
-            <ul className="absolute top-full hidden group-hover:block bg-white/10 backdrop-blur-md rounded-md py-2 px-4 space-y-2 z-[9999]">
+            <ul className="absolute top-full hidden group-hover:block bg-gray-900/95 backdrop-blur-md rounded-md py-2 px-4 space-y-2 z-[9999] min-w-max">
               <li><Link href="/prayer-request" className="block hover:text-gray-300 transition-colors duration-300">Prayer Request</Link></li>
               <li><Link href="/home-visit-request" className="block hover:text-gray-300 transition-colors duration-300">Home Visit Request</Link></li>
             </ul>
