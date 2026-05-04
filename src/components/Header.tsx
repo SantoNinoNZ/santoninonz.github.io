@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ onSearchChange, searchQuery }) => {
   };
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-20 p-4 md:p-6 flex justify-between items-center max-w-screen-xl mx-auto bg-transparent text-white">
+    <header className="absolute top-0 left-0 right-0 z-50 p-4 md:p-6 flex justify-between items-center max-w-screen-xl mx-auto bg-transparent text-white">
       {/* Logo */}
       <div className="flex items-center">
         <img src="/assets/images/santoninocebu.png" alt="Santo Niño NZ logo" className="h-16 w-auto" />
@@ -53,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({ onSearchChange, searchQuery }) => {
           <li><Link href="/join-us" className="hover:text-gray-300 transition-colors duration-300">Join Us</Link></li>
           <li className="relative group">
             <span className="hover:text-gray-300 transition-colors duration-300 cursor-pointer">Requests</span>
-            <ul className="absolute hidden group-hover:block bg-white/10 backdrop-blur-md rounded-md mt-2 py-2 px-4 space-y-2">
+            <ul className="absolute top-full hidden group-hover:block bg-white/10 backdrop-blur-md rounded-md py-2 px-4 space-y-2 z-[9999]">
               <li><Link href="/prayer-request" className="block hover:text-gray-300 transition-colors duration-300">Prayer Request</Link></li>
               <li><Link href="/home-visit-request" className="block hover:text-gray-300 transition-colors duration-300">Home Visit Request</Link></li>
             </ul>
