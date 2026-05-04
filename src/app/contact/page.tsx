@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from "@/components/Header";
+import ContactForm from './ContactForm';
 
 const ContactPage = () => {
   return (
@@ -16,53 +17,7 @@ const ContactPage = () => {
           <p className="mb-2"><strong>Phone#s:</strong> 09 570 1139, 027 487 5428 or 027 570 1139</p>
         </div>
 
-        <form className="space-y-4">
-          <div>
-            <label htmlFor="name" className="block text-lg font-semibold mb-1">Name (required)</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4B34C]"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-lg font-semibold mb-1">Email (required)</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4B34C]"
-            />
-          </div>
-          <div>
-            <label htmlFor="subject" className="block text-lg font-semibold mb-1">Message Subject</label>
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4B34C]"
-            />
-          </div>
-          <div>
-            <label htmlFor="message" className="block text-lg font-semibold mb-1">Enter your Message (required)</label>
-            <textarea
-              id="message"
-              name="message"
-              rows={5}
-              required
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#F4B34C]"
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-[#861D1D] text-white font-bold py-3 px-4 rounded-md hover:bg-[#F4B34C] transition-colors duration-300"
-          >
-            Send Message
-          </button>
-        </form>
+        <ContactForm />
       </div>
     </main>
   );
