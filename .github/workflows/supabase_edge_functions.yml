@@ -26,6 +26,7 @@ jobs:
         run: |
           supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_REF }}
           supabase functions deploy parse-gospel --no-verify-jwt
+          supabase functions deploy submit-form --no-verify-jwt
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
           SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }} # Added from Link step
@@ -33,3 +34,10 @@ jobs:
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           GOOGLE_GEMINI_API_KEY: ${{ secrets.GOOGLE_GEMINI_API_KEY }} # For the Gemini API key
           GEMINI_MODEL: ${{ secrets.GEMINI_MODEL }} # For the Gemini model name
+
+      - name: Set Edge Function Secrets
+        working-directory: ./supabase
+        run: |
+          supabase secrets set TURNSTILE_SECRET_KEY=${{ secrets.TURNSTILE_SECRET_KEY }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
